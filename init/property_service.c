@@ -117,6 +117,11 @@ struct {
 /* END Motorola */
     // Motorola, a22976, 20-Oct-2010, IKSTABLETWOV-3218
     { "cdma.nbpcd.supported", AID_RADIO, AID_RADIO },
+//BEGIN Motorola, IKSTABLE6-5050
+    { "vzw.inactivetimer",   AID_RADIO,    0 },
+    { "persist.ril",         AID_RADIO,    0 },
+    { "persist.lte",         AID_RADIO,    0 },
+//END Motorola, IKSTABLE6-5050
     // Motorola, vrwd38, IKSTABLEFOURV-3408
     { "hw.",              AID_MOT_WHISPER, 0 },
  #endif

@@ -58,8 +58,9 @@
 #define AID_UNUSED1       1022  /* deprecated, DO NOT USE */
 #define AID_MEDIA_RW      1023  /* internal media storage write access */
 #define AID_MTP           1024  /* MTP USB driver access */
-#define AID_NFC           1025  /* nfc subsystem */
+#define AID_UNUSED2       1025  /* deprecated, DO NOT USE */
 #define AID_DRMRPC        1026  /* group for drm rpc */
+#define AID_NFC           1027  /* nfc subsystem */
 
 #define AID_SHELL         2000  /* adb and debug shell user */
 #define AID_CACHE         2001  /* cache access */
@@ -74,6 +75,7 @@
 #define AID_NET_ADMIN     3005  /* can configure interfaces and routing tables. */
 #define AID_NET_BW_STATS  3006  /* read bandwidth statistics */
 #define AID_NET_BW_ACCT   3007  /* change bandwidth statistics accounting */
+#define AID_QCOM_ONCRPC   3008  /* can read/write /dev/oncrpc files */
 
 //#ifdef USE_MOTOROLA_USERS
 #define AID_MOT_OSH       5000  /* OSH */
@@ -155,6 +157,7 @@ static const struct android_id_info android_ids[] = {
     { "mot_caif",     AID_MOT_CAIF, },
     { "mot_dlna",     AID_MOT_DLNA,},
 //#endif
+    { "qcom_oncrpc", AID_QCOM_ONCRPC, },
     { "misc",      AID_MISC, },
     { "nobody",    AID_NOBODY, },
 };

@@ -14,6 +14,7 @@ int do_insmod(int nargs, char **args);
 #ifdef USE_MOTOROLA_CODE
 int do_import(int nargs, char **args);
 #endif
+int do_log(int nargs, char **args);
 int do_mkdir(int nargs, char **args);
 int do_mount(int nargs, char **args);
 int do_restart(int nargs, char **args);
@@ -62,6 +63,7 @@ enum {
     KEYWORD(import,      SECTION, 1, 0)
 #endif
     KEYWORD(keycodes,    OPTION,  0, 0)
+    KEYWORD(log,         COMMAND, 1, do_log)
     KEYWORD(mkdir,       COMMAND, 1, do_mkdir)
     KEYWORD(mount,       COMMAND, 3, do_mount)
     KEYWORD(on,          SECTION, 0, 0)

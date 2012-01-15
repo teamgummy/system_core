@@ -77,7 +77,7 @@
 #define AID_NET_BW_ACCT   3007  /* change bandwidth statistics accounting */
 #define AID_QCOM_ONCRPC   3008  /* can read/write /dev/oncrpc files */
 
-//#ifdef USE_MOTOROLA_USERS
+#ifdef USE_MOTOROLA_USERS
 #define AID_MOT_OSH       5000  /* OSH */
 #define AID_MOT_ACCY      9000  /* access to accessory */
 #define AID_MOT_PWRIC     9001  /* power IC */
@@ -91,7 +91,7 @@
 #define AID_MOT_WHISPER   9009  /* Whisper Protocol access */
 #define AID_MOT_CAIF      9010  /* can create CAIF sockets */
 #define AID_MOT_DLNA      9011  /*DLNA native */
-//#endif
+#endif
 
 #define AID_MISC          9998  /* access to misc storage */
 #define AID_NOBODY        9999
@@ -158,6 +158,21 @@ static const struct android_id_info android_ids[] = {
     { "mot_dlna",     AID_MOT_DLNA,},
 //#endif
     { "qcom_oncrpc", AID_QCOM_ONCRPC, },
+#if defined(MOTOROLA_UIDS)
+    { "mot_osh",   AID_MOT_OSH, },
+    { "mot_accy",  AID_MOT_ACCY, },
+    { "mot_pwric", AID_MOT_PWRIC, },
+    { "mot_usb",   AID_MOT_USB, },
+    { "mot_drm",   AID_MOT_DRM, },
+    { "mot_tcmd",  AID_MOT_TCMD, },
+    { "mot_sec_rtc",   AID_MOT_SEC_RTC, },
+    { "mot_tombstone", AID_MOT_TOMBSTONE, },
+    { "mot_tpapi",     AID_MOT_TPAPI, },
+    { "mot_secclkd",   AID_MOT_SECCLKD, },
+    { "mot_whisper",   AID_MOT_WHISPER, },
+    { "mot_caif",  AID_MOT_CAIF, },
+    { "mot_dlna",  AID_MOT_DLNA, },
+#endif
     { "misc",      AID_MISC, },
     { "nobody",    AID_NOBODY, },
 };

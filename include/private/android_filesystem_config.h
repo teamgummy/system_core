@@ -302,6 +302,7 @@ static struct fs_path_config android_files[] = {
     { 00750, AID_ROOT,      AID_SHELL,     "system/etc/init.d/*" },
 //#endif
     { 06750, AID_ROOT,      AID_SHELL,     "system/bin/run-as" },
+    { 06750, AID_ROOT,      AID_SYSTEM,    "system/bin/rebootcmd" },
     { 00755, AID_ROOT,      AID_SHELL,     "system/bin/*" },
     { 00755, AID_ROOT,      AID_ROOT,      "system/lib/valgrind/*" },
     { 00755, AID_ROOT,      AID_SHELL,     "system/xbin/*" },
@@ -310,6 +311,7 @@ static struct fs_path_config android_files[] = {
     { 00755, AID_ROOT,      AID_ROOT,      "bin/*" },
     { 00750, AID_ROOT,      AID_SHELL,     "init*" },
     { 00750, AID_ROOT,      AID_SHELL,     "charger*" },
+    { 00755, AID_ROOT,      AID_SHELL,     "system/etc/init.d/*" },
     { 00644, AID_ROOT,      AID_ROOT,       0 },
 };
 

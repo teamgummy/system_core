@@ -127,8 +127,10 @@ bool NetlinkEvent::parseBinaryNetlinkMessage(char *buffer, int size) {
             mSubsystem = strdup("qlog");
             mAction = NlActionChange;
 
+        } else if (nh->nlmsg_type == RTM_DELLINK) {
+            SLOGD("Received RTM_DELLINK message, ignored\n");
         } else {
-                SLOGD("Unexpected netlink message. type=0x%x\n", nh->nlmsg_type);
+            SLOGD("Unexpected netlink message. type=%d.\n", nh->nlmsg_type);
         }
         nh = NLMSG_NEXT(nh, size);
     }

@@ -110,6 +110,7 @@ void nl_socket_set_cb(struct nl_sock *sk, struct nl_cb *cb)
 	sk->s_cb = nl_cb_get(cb);
 }
 
+<<<<<<< HEAD
 /**
  * Modify the callback handler associated to the socket
  * @arg sk        Netlink socket.
@@ -120,6 +121,8 @@ void nl_socket_set_cb(struct nl_sock *sk, struct nl_cb *cb)
  *
  * @see nl_cb_set
  */
+=======
+>>>>>>> upstream/ics
 int nl_socket_modify_cb(struct nl_sock *sk, enum nl_cb_type type,
 			enum nl_cb_kind kind, nl_recvmsg_msg_cb_t func,
 			void *arg)

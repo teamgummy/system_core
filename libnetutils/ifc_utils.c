@@ -251,7 +251,7 @@ int ifc_act_on_address(int action, const char *name, const char *address,
     union {
         struct sockaddr_storage ss;
         struct sockaddr_in sin;
-        struct sockaddr_in6 sin6;
+	struct sockaddr_in6 sin6;
     } sa;
     void *addr;
     size_t addrlen;
@@ -485,7 +485,7 @@ int ifc_get_info(const char *name, in_addr_t *addr, int *prefixLength, unsigned 
             *addr = 0;
         } else {
             struct sockaddr_in in;
-            memcpy(&in, &ifr.ifr_addr, sizeof(in));
+	    memcpy(&in, &ifr.ifr_addr, sizeof(in));
             *addr = in.sin_addr.s_addr;
         }
     }

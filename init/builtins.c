@@ -261,7 +261,11 @@ int do_exec(int nargs, char **args)
     }
     else
     {
+<<<<<<< HEAD
         while (waitpid(pid, &status, 0) == -1 && errno == EINTR);
+=======
+        waitpid(pid, &status, 0);
+>>>>>>> 907e8f895a160debedbc5a25181f9ca539fb9ae7
         if (WEXITSTATUS(status) != 0) {
             ERROR("exec: pid %1d exited with return code %d: %s", (int)pid, WEXITSTATUS(status), strerror(status));
         }
@@ -317,6 +321,16 @@ int do_insmod(int nargs, char **args)
     return do_insmod_inner(nargs, args, size);
 }
 
+<<<<<<< HEAD
+#ifdef USE_MOTOROLA_CODE
+int do_import(int nargs, char **args)
+{
+    return init_parse_config_file(args[1]);
+}
+#endif
+
+=======
+>>>>>>> 907e8f895a160debedbc5a25181f9ca539fb9ae7
 int do_log(int nargs, char **args)
 {
     char* par[nargs+3];
@@ -383,6 +397,9 @@ static struct {
     const char *name;
     unsigned flag;
 } mount_flags[] = {
+#ifdef USE_MOTOROLA_CODE
+    { "move",       MS_MOVE },
+#endif
     { "noatime",    MS_NOATIME },
     { "noexec",     MS_NOEXEC },
     { "nosuid",     MS_NOSUID },
@@ -443,6 +460,26 @@ int do_mount(int nargs, char **args)
         }
 
         goto exit_success;
+#ifdef USE_MOTOROLA_CODE
+    } else if (!strncmp(source, "mmc@", 4)) {
+        sprintf(tmp, "/dev/block/%s", source + 4);
+
+        if (wait) {
+            wait_for_file(tmp, COMMAND_RETRY_TIMEOUT);
+            /*
+             * Seeing system doesn't guarantee we see userdata
+             * For now, we don't wait in the mount script, so
+             *    need to make sure userdata show up here
+             */
+            wait_for_file("/dev/block/userdata", COMMAND_RETRY_TIMEOUT);
+        }
+        if (mount(tmp, target, system, flags, options) < 0) {
+            ERROR("mount device (%s) to point (%s) failed", tmp, target);
+            return -1;
+        }
+
+        return 0;
+#endif
     } else if (!strncmp(source, "loop@", 5)) {
         int mode, loop, fd;
         struct loop_info info;

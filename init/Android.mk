@@ -31,6 +31,16 @@ SYSTEM_CORE_INIT_DEFINES := \
 		BOARD_CHARGING_CMDLINE_NAME \
 		BOARD_CHARGING_CMDLINE_VALUE
 
+ifeq ($(BOARD_HAS_LOCKED_BOOTLOADER), true)
+    LOCAL_CFLAGS += -DBOARD_HAS_LOCKED_BOOTLOADER
+endif
+ifeq ($(USE_MOTOROLA_USERS), true)
+    LOCAL_CFLAGS += -DUSE_MOTOROLA_USERS
+endif
+ifeq ($(USE_MOTOROLA_CODE), true)
+    LOCAL_CFLAGS += -DUSE_MOTOROLA_CODE
+endif
+
 $(foreach system_core_init_define,$(SYSTEM_CORE_INIT_DEFINES), \
   $(if $($(system_core_init_define)), \
     $(eval LOCAL_CFLAGS += -D$(system_core_init_define)=\"$($(system_core_init_define))\") \

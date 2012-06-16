@@ -14,7 +14,7 @@ PIXELFLINGER_SRC_FILES:= \
     codeflinger/GGLAssembler.cpp \
     codeflinger/load_store.cpp \
     codeflinger/blending.cpp \
-    codeflinger/texturing.cpp \
+    codeflinger/texturing.cpp.arm \
     codeflinger/disassem.c \
 	tinyutils/SharedBuffer.cpp \
 	tinyutils/VectorImpl.cpp \
@@ -34,8 +34,13 @@ ifeq ($(ARCH_ARM_HAVE_NEON),true)
 PIXELFLINGER_SRC_FILES += t32cb16_neon.S
 PIXELFLINGER_SRC_FILES += col32cb16blend_neon.S
 PIXELFLINGER_CFLAGS += -D__ARM_HAVE_NEON
+ifeq ($(TARGET_ARCH_VARIANT),armv7-a-neon)
+PIXELFLINGER_SRC_FILES += col32cb16blend_neon.S
+PIXELFLINGER_SRC_FILES += t32cb16blend_neon.S
+PIXELFLINGER_SRC_FILES += t32cb16_neon.S
 else
 PIXELFLINGER_SRC_FILES += col32cb16blend.S
+endif
 endif
 endif
 
@@ -43,6 +48,10 @@ ifeq ($(TARGET_ARCH),arm)
 # special optimization flags for pixelflinger
 PIXELFLINGER_CFLAGS += -fstrict-aliasing -fomit-frame-pointer
 endif
+
+PIXELFLINGER_CFLAGS += \
+	-fvisibility=hidden \
+	-DPF_EXPORT="__attribute__((visibility(\"default\")))"
 
 LOCAL_SHARED_LIBRARIES := libcutils
 

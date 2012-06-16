@@ -261,11 +261,7 @@ int do_exec(int nargs, char **args)
     }
     else
     {
-<<<<<<< HEAD
         while (waitpid(pid, &status, 0) == -1 && errno == EINTR);
-=======
-        waitpid(pid, &status, 0);
->>>>>>> 907e8f895a160debedbc5a25181f9ca539fb9ae7
         if (WEXITSTATUS(status) != 0) {
             ERROR("exec: pid %1d exited with return code %d: %s", (int)pid, WEXITSTATUS(status), strerror(status));
         }
@@ -321,7 +317,6 @@ int do_insmod(int nargs, char **args)
     return do_insmod_inner(nargs, args, size);
 }
 
-<<<<<<< HEAD
 #ifdef USE_MOTOROLA_CODE
 int do_import(int nargs, char **args)
 {
@@ -329,8 +324,6 @@ int do_import(int nargs, char **args)
 }
 #endif
 
-=======
->>>>>>> 907e8f895a160debedbc5a25181f9ca539fb9ae7
 int do_log(int nargs, char **args)
 {
     char* par[nargs+3];

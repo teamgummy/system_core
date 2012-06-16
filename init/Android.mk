@@ -31,7 +31,6 @@ endif
 ifeq ($(USE_MOTOROLA_CODE), true)
     LOCAL_CFLAGS += -DUSE_MOTOROLA_CODE
 endif
-
 SYSTEM_CORE_INIT_DEFINES := BOARD_CHARGING_MODE_BOOTING_LPM
 
 $(foreach system_core_init_define,$(SYSTEM_CORE_INIT_DEFINES), \

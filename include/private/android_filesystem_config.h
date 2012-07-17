@@ -61,6 +61,9 @@
 #define AID_UNUSED2       1025  /* deprecated, DO NOT USE */
 #define AID_DRMRPC        1026  /* group for drm rpc */
 #define AID_NFC           1027  /* nfc subsystem */
+#ifdef OMAP_ENHANCEMENT
+#define AID_FMRADIO       1028  /* FM subsystem */
+#endif
 
 #define AID_SHELL         2000  /* adb and debug shell user */
 #define AID_CACHE         2001  /* cache access */

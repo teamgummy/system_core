@@ -50,6 +50,9 @@ typedef enum {
 #ifdef QCOM_HARDWARE
     AUDIO_STREAM_FM               = 10,
 #endif
+#ifdef OMAP_ENHANCEMENT
+    AUDIO_STREAM_EXCLUSIVE        = 10,
+#endif
     AUDIO_STREAM_CNT,
     AUDIO_STREAM_MAX              = AUDIO_STREAM_CNT - 1,
 } audio_stream_type_t;
@@ -69,6 +72,10 @@ typedef enum {
 #ifdef QCOM_HARDWARE
     AUDIO_SOURCE_FM_RX               = 8,
     AUDIO_SOURCE_FM_RX_A2DP          = 9,
+#endif
+#ifdef OMAP_ENHANCEMENT
+    AUDIO_SOURCE_WFD                 = 8,
+    AUDIO_SOURCE_FM_RADIO_RX         = 9,
 #endif
     AUDIO_SOURCE_CNT,
     AUDIO_SOURCE_MAX                 = AUDIO_SOURCE_CNT - 1,
@@ -298,6 +305,10 @@ typedef enum {
     AUDIO_DEVICE_OUT_AUX_DIGITAL               = 0x400,
     AUDIO_DEVICE_OUT_ANLG_DOCK_HEADSET         = 0x800,
     AUDIO_DEVICE_OUT_DGTL_DOCK_HEADSET         = 0x1000,
+#ifdef OMAP_ENHANCEMENT
+    AUDIO_DEVICE_OUT_FM_RADIO_TX               = 0x2000,
+    AUDIO_DEVICE_OUT_WFD                       = 0x4000,
+#endif
     AUDIO_DEVICE_OUT_FM                        = 0x2000,
 #if defined(QCOM_HARDWARE) && !defined(USES_AUDIO_LEGACY)
     AUDIO_DEVICE_OUT_ANC_HEADSET               = 0x4000,
@@ -330,6 +341,10 @@ typedef enum {
                                  AUDIO_DEVICE_OUT_DIRECTOUTPUT |
                                  AUDIO_DEVICE_OUT_PROXY |
 #endif
+#ifdef OMAP_ENHANCEMENT
+                                 AUDIO_DEVICE_OUT_FM_RADIO_TX |
+                                 AUDIO_DEVICE_OUT_WFD |
+#endif
                                  AUDIO_DEVICE_OUT_DEFAULT),
     AUDIO_DEVICE_OUT_ALL_A2DP = (AUDIO_DEVICE_OUT_BLUETOOTH_A2DP |
                                  AUDIO_DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES |
@@ -361,6 +376,10 @@ typedef enum {
     AUDIO_DEVICE_IN_VOICE_CALL            = 0x400000,
     AUDIO_DEVICE_IN_BACK_MIC              = 0x800000,
 #endif
+#ifdef OMAP_ENHANCEMENT
+    AUDIO_DEVICE_IN_FM_RADIO_RX           = 0x2000000,
+    AUDIO_DEVICE_IN_WFD                   = 0x4000000,
+#endif
     AUDIO_DEVICE_IN_DEFAULT               = 0x80000000,
 
     AUDIO_DEVICE_IN_ALL     = (AUDIO_DEVICE_IN_COMMUNICATION |
@@ -375,6 +394,10 @@ typedef enum {
                                AUDIO_DEVICE_IN_ANC_HEADSET |
                                AUDIO_DEVICE_IN_FM_RX |
                                AUDIO_DEVICE_IN_FM_RX_A2DP |
+#endif
+#ifdef OMAP_ENHANCEMENT
+                               AUDIO_DEVICE_IN_FM_RADIO_RX |
+                               AUDIO_DEVICE_IN_WFD |
 #endif
                                AUDIO_DEVICE_IN_DEFAULT),
     AUDIO_DEVICE_IN_ALL_SCO = AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET,

@@ -85,7 +85,11 @@ enum {
     // request FRAME and METADATA. Or the apps can request only FRAME or only
     // METADATA.
     CAMERA_MSG_PREVIEW_METADATA = 0x0400, // dataCallback
-    CAMERA_MSG_BURST_IMAGE = 0x0800, // dataCallback
+    CAMERA_MSG_STATS_DATA       = 0x800,
+#ifdef OMAP_ENHANCEMENT
+    CAMERA_MSG_COMPRESSED_BURST_IMAGE = 0x0800, // dataCallback
+    CAMERA_MSG_RAW_BURST = 0x1000,        // dataCallback
+#endif
     CAMERA_MSG_ALL_MSGS = 0xFFFF
 };
 
@@ -148,6 +152,21 @@ enum {
     CAMERA_CMD_HISTOGRAM_OFF     = 9,
     CAMERA_CMD_HISTOGRAM_SEND_DATA  = 10,
 
+#ifdef OMAP_ENHANCEMENT
+    /**
+     * Camera Preview deinitialization.
+     * This is a TI enhancement for supporting tunneling during VTC.
+     * This command causes the camera component to move from loaded to idle state.
+     */
+    CAMERA_CMD_PREVIEW_INITIALIZATION = 256,
+
+    /**
+     * Camera Preview initialization.
+     * This is a TI enhancement for supporting tunneling during VTC.
+     * This command causes the camera component to move from executing to idle state.
+     */
+    CAMERA_CMD_PREVIEW_DEINITIALIZATION = 257,
+#endif
 };
 
 /** camera fatal errors */
@@ -234,6 +253,19 @@ typedef struct camera_face {
  * The metadata of the frame data.
  */
 typedef struct camera_frame_metadata {
+
+#ifdef OMAP_ENHANCEMENT
+    /**
+     * Exposure time in microseconds
+     */
+    int32_t exposure_time;
+
+    /**
+     * Analog gain (EV * 100)
+     */
+    int32_t analog_gain;
+#endif
+
     /**
      * The number of detected faces in the frame.
      */

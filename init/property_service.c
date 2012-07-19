@@ -45,6 +45,8 @@
 #include "util.h"
 #include "log.h"
 
+#include <device_perms.h>
+
 #define PERSISTENT_PROPERTY_DIR  "/data/property"
 
 static int persistent_properties_loaded = 0;
@@ -53,6 +55,7 @@ static int property_area_inited = 0;
 static int property_set_fd = -1;
 
 /* White list of permissions for setting property services. */
+#ifndef PROPERTY_PERMS
 struct {
     const char *prefix;
     unsigned int uid;
@@ -106,42 +109,17 @@ struct {
     { "persist.sys.",     AID_SYSTEM,   0 },
     { "persist.service.", AID_SYSTEM,   0 },
     { "persist.security.",AID_SYSTEM,   0 },
-#ifdef USE_MOTOROLA_USERS
-    // Motorola, w18335, 12-May-2011, IKTCMD-212
-    { "tcmd.",            AID_MOT_TCMD, AID_MOT_WHISPER },
-    { "persist.mot.proximity.", AID_RADIO, 0},
-    { "mot.backup_restore.",AID_MOT_TCMD, 0},
-    { "mot.",             AID_MOT_TCMD, 0 },
-/* BEGIN Motorola, cjg040 */
-    { "sys.",             AID_MOT_OSH,  0 },
-    { "hw.",              AID_MOT_OSH,  0 },
-/* END Motorola */
-    // Motorola, a22976, 20-Oct-2010, IKSTABLETWOV-3218
-    { "cdma.nbpcd.supported", AID_RADIO, AID_RADIO },
-// BEGIN Motorola, IKSTABLE6-5050
-    { "vzw.inactivetimer",   AID_RADIO,    0 },
-    { "persist.ril",         AID_RADIO,    0 },
-    { "persist.lte",         AID_RADIO,    0 },
-// END Motorola, IKSTABLE6-5050
-    // Motorola, vrwd38, IKSTABLEFOURV-3408
-    { "hw.",              AID_MOT_WHISPER, 0 },
-#endif
-    { "net.pdp0",         AID_RADIO,    AID_RADIO },
-    { "net.pdp1",         AID_RADIO,    AID_RADIO },
-    { "net.pdp2",         AID_RADIO,    AID_RADIO },
-    { "net.pdp3",         AID_RADIO,    AID_RADIO },
-    { "net.pdp4",         AID_RADIO,    AID_RADIO },
-    { "net.vsnet0",       AID_RADIO,    AID_RADIO },
-    { "net.vsnet1",       AID_RADIO,    AID_RADIO },
-    { "net.vsnet2",       AID_RADIO,    AID_RADIO },
-    { "net.vsnet3",       AID_RADIO,    AID_RADIO },
+    { "net.pdp",          AID_RADIO,    AID_RADIO },
     { NULL, 0, 0 }
 };
+/* Avoid extending this array. Check device_perms.h */
+#endif
 
 /*
  * White list of UID that are allowed to start/stop services.
  * Currently there are no user apps that require.
  */
+#ifndef CONTROL_PERMS
 struct {
     const char *service;
     unsigned int uid;
@@ -159,12 +137,10 @@ struct {
     { "mdm_usb_suspend", AID_RADIO, AID_RADIO },
 #endif
     { "ril-daemon",AID_RADIO, AID_RADIO },
-    { "rawip_vsnet1",AID_RADIO, AID_RADIO },
-    { "rawip_vsnet2",AID_RADIO, AID_RADIO },
-    { "rawip_vsnet3",AID_RADIO, AID_RADIO },
-    { "rawip_vsnet4",AID_RADIO, AID_RADIO },
-    {NULL, 0, 0 }
+     {NULL, 0, 0 }
 };
+/* Avoid extending this array. Check device_perms.h */
+#endif
 
 typedef struct {
     void *data;
